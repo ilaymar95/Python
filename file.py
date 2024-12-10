@@ -1,3 +1,5 @@
+import string
+import random
 class File:
     def __init__(self, name, file_type):
         self.name = str(name)
@@ -23,17 +25,29 @@ class File:
     def change_content(self, content):
         self.content = content
         self.size_calc()
-        print("File updated successfully.")
+        print("File updated.")
 
     def add_content(self, content):
         self.content += content
         self.size_calc()
-        print("File updated successfully.")
+        print("File updated.")
 
     def size_calc(self):
         if self.type == 'pdf':
             self.size = (len(self.content) / 5)
         else:
             self.size = (len(self.content) / 10)  # every 10 characters equal to 1 in size
-        print(f"Calculated size: {self.size} MB")
 
+    def __eq__(self, other):
+        if isinstance(other,File):
+            return self.name == other.name and self.size == other.size and self.type == other.type
+        return False
+
+
+def gen_random_string(length):
+    letters = string.ascii_letters  # provides the alphabet as a string inside letters
+    return ''.join(random.choice(letters.lower()) for i in range(length))  # random.choice chooses random letters from 'letters'
+
+def gen_random_type():
+    lst = ['txt', 'docx', 'pdf']
+    return random.choice(lst)
