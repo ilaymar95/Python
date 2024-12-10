@@ -23,16 +23,19 @@ class File:
         print(f"File type changed: {self.type}")
 
     def change_content(self, content):
+        ###Changes the content of the file, using a string that the function gets and updates the file size###
         self.content = content
         self.size_calc()
         print("File updated.")
 
     def add_content(self, content):
+        ###Adds content into a file, using a string and updates the file size###
         self.content += content
         self.size_calc()
         print("File updated.")
 
     def size_calc(self):
+        ###Updates the file size - PDF size is doubled###
         if self.type == 'pdf':
             self.size = (len(self.content) / 5)
         else:
@@ -45,9 +48,11 @@ class File:
 
 
 def gen_random_string(length):
+    ###Generates a random string of letters the size of length###
     letters = string.ascii_letters  # provides the alphabet as a string inside letters
     return ''.join(random.choice(letters.lower()) for i in range(length))  # random.choice chooses random letters from 'letters'
 
 def gen_random_type():
+    ###Generates a random file type from list = ['txt','docx,'pdf']###
     lst = ['txt', 'docx', 'pdf']
     return random.choice(lst)
